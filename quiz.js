@@ -34,11 +34,11 @@ export default class Quiz extends LightningElement {
     handleChoice(event)
     {
         console.log(event.target.value);
-        if(event.target.label=='Radio Group1')
+        if(event.target.name=='Radio Group1')
             this.q1value = event.detail.value;
-        else if(event.target.label=='Radio Group2')
+        else if(event.target.name=='Radio Group2')
             this.q2value = event.detail.value;
-        else if(event.target.label=='Radio Group3')
+        else if(event.target.name=='Radio Group3')
             this.q3value = event.detail.value;
         if(event.target.value=='q1option1' || event.target.value=='q2option1' || event.target.value=='q3option1')
            {
@@ -98,6 +98,7 @@ export default class Quiz extends LightningElement {
                     this.name=''; this.email=''; 
                 this.refs.Name.value='';
                 this.refs.Email.value='';
+                this.isModalOpen=false;
             }
         this.show=false; 
         this.Evaluated=false;
