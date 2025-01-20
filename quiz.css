@@ -1,0 +1,26 @@
+.custom{
+    background-color: darkgreen;
+    color:aliceblue;
+    font-weight: bold;
+    
+}
+
+.bt{
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+.resultCSS{
+    padding: 20px;
+    margin:20px;
+    border:solid 10px;
+    border-color: blue;
+    text-align: center;
+}
+
+.btnspacing
+{
+    padding: 20px;
+    margin:20px;  
+}

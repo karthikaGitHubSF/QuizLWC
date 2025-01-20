@@ -1,0 +1,125 @@
+<template>
+    <lightning-card title="QUIZ APP">
+     <div class="slds-p-around_medium">
+         <lightning-input lwc:ref="Name" type="text" label="Name" onchange={handleChange} required ></lightning-input>
+         <lightning-input lwc:ref="Email" type="email" label="Email" onchange={handleChange} required></lightning-input>
+         <br/>
+         <br/>
+         <lightning-button lwc:ref="start" label="Start Quiz" onclick={handleConfirm} class="slds-p-around_large bt" variant="success" ></lightning-button>
+     </div>
+     <template if:true={isModalOpen}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <h2 class="slds-text-heading_medium">Confirmation</h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium">
+            <p>After you confirm, your Timer will start.</p>
+            <p>You can choose answers and navigate between questions.</p>
+            <p> Score for each correct answer is five</p>
+            <p>Once you submitted, Your Score will be displayed.</p>
+            <p> Then you can close or Play again.</p>
+          </div>
+          <footer class="slds-modal__footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+            &emsp14;&emsp14;
+            <lightning-button variant="destructive" label="Confirm" onclick={handleClick}></lightning-button>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+     <template lwc:if={show}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+            <div class="slds-modal__header slds-grid custom">
+              <div class="slds-col slds-size_2-of-4"> Hello {name}</div>
+              <div class="slds-col slds-size_1-of-4">
+                          {currentTime} 
+              </div>
+              </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+         
+          <template lwc:if={show1}>
+           <div>
+             <p>1.Which method is used to communicate from a child LWC component to a parent component?</p>
+               
+              <lightning-radio-group lwc:ref="q1"
+                          label="Radio Group1"
+                          options={options1}
+                          value={q1value}                          
+                          onchange={handleChoice}
+                          type="radio"></lightning-radio-group>
+            </div>
+         </template>
+            
+         <template lwc:elseif={show2}>
+            <div>
+              <p>2. How do you define a public property in LWC?</p>
+                
+               <lightning-radio-group lwc:ref="q2"
+                           label="Radio Group2"
+                           options={options2}
+                            value={q2value}
+                           onchange={handleChoice}
+                           type="radio"></lightning-radio-group>
+             </div>
+          </template>
+
+          <template lwc:elseif={show3}>
+            <div>
+              <p>3. What is the default isolation mechanism in LWC?</p>
+                
+               <lightning-radio-group lwc:ref="q3"
+                           label="Radio Group3"
+                           options={options3}
+                            value={q3value}
+                           onchange={handleChoice}
+                           type="radio"></lightning-radio-group>
+             </div>
+          </template>
+
+            <template lwc:if={final}>
+              <div class="demo-only" style="height:24rem">
+                <section role="dialog" tabindex="0" aria-modal="true" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" 
+                         class="slds-modal slds-fade-in-open slds-modal_prompt">
+                  <div class="slds-modal__container">
+                     <div class="slds-modal__header ">
+                        <h1 class="slds-text-heading_medium" id="prompt-heading-id">Result</h1>
+                     </div>
+                
+                     <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+                       <div class="resultCSS">
+                           <h2>{greetings} {name}!! </h2>
+                          <div> Score : {score} out of 15 </div>
+                          <div> Time Taken : {currentTime} </div>
+                       </div>
+                      </div>
+                
+                      <div class="slds-modal__footer slds-theme_default ">
+                        <lightning-button class="slds-p-around_xxlarge" label="Play Again" variant="brand" onclick={handleReset}></lightning-button>
+                           &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
+                        <lightning-button  class="slds-p-around_xxlarge" label="Close"  variant="destructive" onclick={handleReset} ></lightning-button>
+                      </div>
+                  </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+              </div>
+                    
+            </template>
+        </div>
+            <div class="slds-modal__footer">
+            
+            <lightning-button lwc:ref="prev" label="Previous" class="slds-p-around_xxlarge" variant="Brand" onclick={handlePrev} disabled=true></lightning-button>
+            &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
+            <lightning-button lwc:ref="next" label="Next" class="slds-p-around_xxlarge" variant="Brand" onclick={handleNext} ></lightning-button>
+            &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;
+            <button class="slds-button slds-button_brand slds-p-around_xxlarge" onclick={handleSubmit}>Submit</button>
+            </div>
+            </div>
+      </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+     </template>
+    </lightning-card>
+</template>
